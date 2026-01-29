@@ -1,0 +1,213 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filters{
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+    }
+        .filter-a{
+         text-decoration: none;
+         color: #222222;
+    }
+    .filters:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+    .filters{
+        font-size: 0.8rem;
+    }
+    .tax-info {
+        display: none;
+    }
+    .tax-toggle{
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3.25rem;
+        padding: 1rem;
+        margin-left: 2rem;
+        display: flex;
+        align-items: center;
+    }
+    .no-hot{
+        width: 100vw;
+        justify-content: center;
+    }
+</style> 
+
+    <body>
+        <!-- <h2>All listing</h2> -->
+        <div id="filters">
+             <div class="filters">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </div>
+
+            <a href="/listings/filter/Rooms" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Iconic Cities" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Iconic Cities</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Mountains" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Castles" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>Castles</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Amazing Pools" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing Pools</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Camping" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Farms" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-cow"></i></div>
+                <p>Farms</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Arctic" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-regular fa-snowflake"></i></div>
+                <p>Arctic</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Domes" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-igloo"></i></div>
+                <p>Domes</p>
+            </div>
+            </a>
+            <a href="/listings/filter/Boats" class="filter-a">
+            <div class="filters">
+                <div><i class="fa-solid fa-ship"></i></div>
+                <p>Boats</p>
+            </div>
+            </a>
+            <!-- <div class="filters">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>Castles</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing Pools</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-cow"></i></div>
+                <p>Farms</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-regular fa-snowflake"></i></div>
+                <p>Arctic</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-igloo"></i></div>
+                <p>Domes</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-ship"></i></div>
+                <p>Boats</p>
+            </div> -->
+            <div class="tax-toggle">
+                <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+           <% if(allListing.length > 0){ %> 
+        <%for(let listing of allListing){%>
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="card col listing-card">
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" >
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <b> <%=listing.title%></b> 
+                            <br>
+                            &#8377;<%=listing.price.toLocaleString("en-IN")%> / Night
+                            <i class="tax-info"> &nbsp; &nbsp; +18% GSt</i>
+                    </p>
+                </div>
+                </div>
+            </a>
+                <%}%>
+                <% } else { %>
+    <div class="col-12 text-center mt-5 no-hot">
+        <div class="card shadow-sm border-0 p-4">
+            <div class="card-body">
+                <i class="fa-solid fa-bed fa-3x text-muted mb-3"></i>
+                <h4 class="fw-bold">No hotels with this title</h4>
+                <p class="text-muted">
+                    Try searching with a different title or explore other categories.
+                </p>
+                <a href="/listings" class="btn btn-dark rounded-pill mt-2">
+                    Browse All Hotels
+                </a>
+            </div>
+        </div>
+    </div>
+<% } %>
+            </div>
+          
+    </body>
+
+    <script>
+        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName("tax-info");
+            for(info of taxInfo){
+                if(info.style.display !="inline"){
+                    info.style.display="inline";
+                }else
+                info.style.display="none";
+            }
+        })
+    </script>

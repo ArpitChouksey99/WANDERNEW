@@ -1,0 +1,114 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  #tags-container label {
+  background-color: #f1f1f1;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease; 
+}
+
+/* Hover (before clicking) */
+#tags-container label:hover {
+  background-color: #ddd;   
+  color: #333;
+}
+
+
+#tags-container input:checked + label {
+  background-color: #fe424d;
+  color: #fff;
+}
+
+
+</style>
+    <body>
+        <div class="row">
+            <div class="col-8 offset-2" >
+        <!-- <br> -->
+         <h3>Create a New Listing </h3>
+        <form method="post" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data"> 
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+
+                <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control" required>
+                <div class="valid-feedback">Title looks good!</div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea type="text" name="listing[description]" class="form-control" required></textarea>
+                <div class="invalid-feedback">Please enter a short description</div>
+
+            </div>
+            
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" name="listing[image][url]" placeholder="Enter image url" class="form-control" required>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" name="listing[price]" placeholder="1200" class="form-control" required>
+
+                <div class="invalid-feedback">Please enter a valid Price</div>
+            </div>
+
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="listing[country]" placeholder="India" class="form-control" required>
+                <div class="invalid-feedback">Please enter a country name</div>
+
+            </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="listing[location]" placeholder="Jaipur,Rajasthan" class="form-control" required>
+                <div class="invalid-feedback">Location should be valid</div>
+
+            </div>
+
+            <div class="mb-3">
+          <label class="form-label">Tags</label>
+          <div id="tags-container" class="d-flex flex-wrap gap-2">
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Mountains" id="tag1">
+            <label class="btn btn-outline-dark rounded-pill" for="tag1">Mountains</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Castles" id="tag2">
+            <label class="btn btn-outline-dark rounded-pill" for="tag2">Castles</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Arctic" id="tag3">
+            <label class="btn btn-outline-dark rounded-pill" for="tag3">Arctic</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Iconic City" id="tag4">
+            <label class="btn btn-outline-dark rounded-pill" for="tag4">Iconic City</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Camping" id="tag5">
+            <label class="btn btn-outline-dark rounded-pill" for="tag5">Camping</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Farms" id="tag6">
+            <label class="btn btn-outline-dark rounded-pill" for="tag6">Farms</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Boats" id="tag7">
+            <label class="btn btn-outline-dark rounded-pill" for="tag7">Boats</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Rooms" id="tag8">
+            <label class="btn btn-outline-dark rounded-pill" for="tag8">Rooms</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Amazing Pools" id="tag9">
+            <label class="btn btn-outline-dark rounded-pill" for="tag9">Amazing Pools</label>
+
+            <input type="checkbox" class="btn-check" name="listing[tags][]" value="Domes" id="tag10">
+            <label class="btn btn-outline-dark rounded-pill" for="tag10">Domes</label>
+          </div>
+        </div>
+
+            <button class="btn btn-dark add-btn">add</button>
+            <br>
+            <br>
+        </form>
+        </div>
+        </div>
+    </body>
