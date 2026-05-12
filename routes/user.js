@@ -5,6 +5,11 @@ const wrapasync = require("../utils/wrapasync.js");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
 const userController = require("../controllers/user.js");
+const listingController = require("../controllers/listing.js");
+
+
+router.route("/")
+.get(wrapasync(listingController.index));
 
 router.route("/signup")
 .get( userController.renderSignupForm)

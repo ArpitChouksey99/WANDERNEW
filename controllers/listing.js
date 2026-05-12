@@ -106,10 +106,19 @@ module.exports.destroyListing = async (req,res) => {
     req.flash("success","Listing Deleted!");
     res.redirect("/listings");
 }
-module.exports.renderSeach = async (req,res) => {
-    let allListing = await Listing.find({title: req.query.title});
-    res.render("./listing/search.ejs",{allListing});
-}
+// module.exports.renderSeach = async (req,res) => {
+//     let allListing = await Listing.find({title: req.query.title});
+//     res.render("./listing/search.ejs",{allListing});
+// }
+module.exports.renderSeach = async (req, res) => {
+    let { title } = req.query;
+
+    let allListing = await Listing.find({
+        title: { $regex: title, $options: "i" }
+    });
+
+    res.render("./listing/search.ejs", { allListing });
+};
 module.exports.fiter = async (req,res) => {
     let {tag} = req.params;
     let allListing = await Listing.find({tags: { $in: [tag] }});
