@@ -106,6 +106,11 @@ app.use((err,req,res,next) => {
     res.status(statusCode).render("error.ejs",{message});
 });
 
-app.listen(3000, () =>{
-    console.log("server listning on port 3000");
+// app.listen(3000, () =>{
+//     console.log("server listning on port 3000");
+// });
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+   console.log(`server running on ${PORT}`);
 });
