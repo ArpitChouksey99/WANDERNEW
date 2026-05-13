@@ -49,14 +49,27 @@ async function main() {
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 //
+// const sessionOptions = {
+//     secret: "mysupersecretcode",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie:{
+//         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+//         maxAge: 7 * 24 * 60 * 60 * 1000,
+//         httpOnly: true
+//     }
+// };
+app.set("trust proxy", 1);
+
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
     saveUninitialized: true,
-    cookie:{
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    cookie: {
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production"
     }
 };
 
