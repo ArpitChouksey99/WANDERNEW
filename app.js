@@ -3,6 +3,7 @@ if(process.env.NODE_ENV != "production"){
 }
 
 console.log(process.env.SECRET);
+const { MongoStore } = require("connect-mongo");
 const express=require("express");
 const app=express();
 const ExpressError = require("./utils/ExpressError.js");
@@ -48,6 +49,19 @@ async function main() {
 
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
+
+const store = MongoStore.create({
+    mongoUrl: process.env.ATLASDB_URL,
+    crypto: {
+        secret: "amkskksksdgs"
+    },
+    touchAfter: 24 * 3600
+});
+
+store.on("error", (err) => {
+    console.log("SESSION STORE ERROR", err);
+});
+
 //
 // const sessionOptions = {
 //     secret: "mysupersecretcode",
@@ -62,9 +76,10 @@ async function main() {
 app.set("trust proxy", 1);
 
 const sessionOptions = {
+    store,
     secret: "mysupersecretcode",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         maxAge: 7 * 24 * 60 * 60 * 1000,
