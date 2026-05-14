@@ -4,6 +4,7 @@ if(process.env.NODE_ENV != "production"){
 
 console.log(process.env.SECRET);
 const { MongoStore } = require("connect-mongo");
+
 const express=require("express");
 const app=express();
 const ExpressError = require("./utils/ExpressError.js");
@@ -84,6 +85,7 @@ const sessionOptions = {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
+        sameSite: "none",
         secure: process.env.NODE_ENV === "production"
     }
 };
@@ -96,8 +98,17 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  console.log("SESSION ID:", req.sessionID);
+  console.log("USER:", req.user);
+  console.log("COOKIE:", req.headers.cookie);
+  next();
+});
+
 passport.use(new LocalStarategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
